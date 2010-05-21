@@ -12,6 +12,7 @@ License:	GPL
 Group:		X11/Applications
 URL:		http://xiphos.org
 Source0:	http://downloads.sourceforge.net/gnomesword/Xiphos/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	aaded6bc81b29935edd989d204928ba3
 BuildRequires:	clucene-core-devel
 BuildRequires:	gnome-spell
 BuildRequires:	gtkhtml-devel >= 3.0
