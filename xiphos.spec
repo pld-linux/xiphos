@@ -1,13 +1,12 @@
 #
 # TODO:
 # - PLDify post/postun scrollkeper updates?
-# - Use %lang macro?
 #
 
 Summary:	GNOME-based Bible research tool
 Name:		xiphos
 Version:	3.1.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 URL:		http://xiphos.org
@@ -53,6 +52,8 @@ install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 mv $RPM_BUILD_ROOT%{_docdir}/%{name}/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 rmdir $RPM_BUILD_ROOT%{_docdir}/%{name}
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -62,12 +63,11 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q -o %{_d
 %postun
 if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xiphos
 %dir %{_datadir}/xiphos
 %{_datadir}/xiphos/*
-%{_datadir}/locale/*
 %dir %{_datadir}/omf/xiphos
 %{_datadir}/omf/xiphos/*.omf
 %{_pixmapsdir}/*
