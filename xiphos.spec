@@ -12,12 +12,14 @@ License:	GPL
 Group:		X11/Applications
 URL:		http://xiphos.org
 Source0:	http://downloads.sourceforge.net/gnomesword/Xiphos/%{version}/%{name}-%{version}.tar.gz
+BuildRequires:	clucene-core-devel
 BuildRequires:	gnome-spell
 BuildRequires:	gtkhtml-devel >= 3.0
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.2
 BuildRequires:	scrollkeeper >= 0.3.5
 BuildRequires:	sword-devel >= 1.6.1
+Requires:	clucene-core
 Requires:	gtkhtml >= 3.0
 Requires:	libbonobo >= 2.0
 Requires:	libgnomeui >= 2.2
