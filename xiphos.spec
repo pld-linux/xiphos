@@ -1,15 +1,10 @@
-#
-# TODO:
-# - PLDify post/postun scrollkeper updates?
-#
-
 Summary:	GNOME-based Bible research tool
 Name:		xiphos
 Version:	3.1.3
-Release:	0.1	
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
-URL:		http://xiphos.org
+URL:		http://www.xiphos.org/
 Source0:	http://downloads.sourceforge.net/gnomesword/Xiphos/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	aaded6bc81b29935edd989d204928ba3
 BuildRequires:	clucene-core-devel
@@ -17,8 +12,10 @@ BuildRequires:	gnome-spell
 BuildRequires:	gtkhtml-devel >= 3.0
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.2
+BuildRequires:	rpmbuild(macros) >= 1.198
 BuildRequires:	scrollkeeper >= 0.3.5
 BuildRequires:	sword-devel >= 1.6.1
+Requires(post,postun):	scrollkeeper
 Requires:	clucene-core
 Requires:	gtkhtml >= 3.0
 Requires:	libbonobo >= 2.0
@@ -48,6 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# scratch  this and instead use %doc relative to files in builddir, not full path to installed docs
 install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 mv $RPM_BUILD_ROOT%{_docdir}/%{name}/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 rmdir $RPM_BUILD_ROOT%{_docdir}/%{name}
@@ -58,20 +56,23 @@ rmdir $RPM_BUILD_ROOT%{_docdir}/%{name}
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q -o %{_datadir}/omf/%{name}; fi
+%scrollkeeper_update_post
 
 %postun
-if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
+%scrollkeeper_update_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
+%doc ABOUT-NLS AUTHORS INSTALL NEWS README TODO
 %attr(755,root,root) %{_bindir}/xiphos
+# XXX these two together do not make sense, add just dir or list verbosely contents?
 %dir %{_datadir}/xiphos
 %{_datadir}/xiphos/*
 %dir %{_datadir}/omf/xiphos
 %{_datadir}/omf/xiphos/*.omf
+# XXX: include ext to glob
 %{_pixmapsdir}/*
+# XXX: create non-scaled pixmaps
 %{_iconsdir}/hicolor/scalable/apps/xiphos.svg
-%doc %{_datadir}/gnome/help/*
-%doc ABOUT-NLS AUTHORS COPYING INSTALL NEWS README TODO
 %{_desktopdir}/%{name}.desktop
+%doc %{_datadir}/gnome/help/*
