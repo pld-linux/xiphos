@@ -45,10 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# scratch  this and instead use %doc relative to files in builddir, not full path to installed docs
-install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
-mv $RPM_BUILD_ROOT%{_docdir}/%{name}/* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
-rmdir $RPM_BUILD_ROOT%{_docdir}/%{name}
+rm -r $RPM_BUILD_ROOT%{_docdir}/%{name}
 
 %find_lang %{name}
 
@@ -64,15 +61,15 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc ABOUT-NLS AUTHORS INSTALL NEWS README TODO
+%doc %{_datadir}/gnome/help/*
 %attr(755,root,root) %{_bindir}/xiphos
-# XXX these two together do not make sense, add just dir or list verbosely contents?
-%dir %{_datadir}/xiphos
-%{_datadir}/xiphos/*
+%{_datadir}/xiphos
 %dir %{_datadir}/omf/xiphos
 %{_datadir}/omf/xiphos/*.omf
-# XXX: include ext to glob
-%{_pixmapsdir}/*
-# XXX: create non-scaled pixmaps
+%dir %{_pixmapsdir}/%{name}
+%{_pixmapsdir}/%{name}/*.png
+%{_pixmapsdir}/%{name}/*.xpm
+%{_pixmapsdir}/%{name}/*.ico
+# TODO: create non-scaled pixmaps
 %{_iconsdir}/hicolor/scalable/apps/xiphos.svg
 %{_desktopdir}/%{name}.desktop
-%doc %{_datadir}/gnome/help/*
