@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+rm -r $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/xiphos.svg
+# .png is enough
+rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}/*.xpm
 
 %find_lang %{name}
 
@@ -68,8 +71,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/omf/xiphos/*.omf
 %dir %{_pixmapsdir}/%{name}
 %{_pixmapsdir}/%{name}/*.png
-%{_pixmapsdir}/%{name}/*.xpm
-%{_pixmapsdir}/%{name}/*.ico
-# TODO: create non-scaled pixmaps
-%{_iconsdir}/hicolor/scalable/apps/xiphos.svg
 %{_desktopdir}/%{name}.desktop
