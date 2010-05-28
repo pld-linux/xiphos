@@ -1,12 +1,13 @@
 Summary:	GNOME-based Bible research tool
 Name:		xiphos
 Version:	3.1.3
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		X11/Applications
 URL:		http://www.xiphos.org/
 Source0:	http://downloads.sourceforge.net/gnomesword/Xiphos/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	aaded6bc81b29935edd989d204928ba3
+Patch0:		%{name}-xulrunner.patch
 BuildRequires:	clucene-core-devel
 BuildRequires:	gnome-spell
 BuildRequires:	gtkhtml-devel >= 3.0
@@ -35,6 +36,7 @@ Society through the SWORD Project.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 %configure
