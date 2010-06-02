@@ -1,7 +1,7 @@
 Summary:	GNOME-based Bible research tool
 Name:		xiphos
 Version:	3.1.3
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		X11/Applications
 URL:		http://www.xiphos.org/
@@ -13,6 +13,7 @@ BuildRequires:	gnome-spell
 BuildRequires:	gtkhtml-devel >= 3.0
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.2
+BuildRequires:	libgsf-devel >= 1
 BuildRequires:	rpmbuild(macros) >= 1.198
 BuildRequires:	scrollkeeper >= 0.3.5
 BuildRequires:	sword-devel >= 1.6.1
@@ -21,6 +22,7 @@ Requires:	clucene-core
 Requires:	gtkhtml >= 3.0
 Requires:	libbonobo >= 2.0
 Requires:	libgnomeui >= 2.2
+Requires:	libgsf >= 1
 Requires:	sword >= 1.6.1
 Obsoletes:	gnomesword
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -49,8 +51,8 @@ rm -rf $RPM_BUILD_ROOT
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/%{name}
 rm -r $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/xiphos.svg
-# .png is enough
 rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}/*.xpm
+rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}/*.ico
 
 %find_lang %{name}
 
