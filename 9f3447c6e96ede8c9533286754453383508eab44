@@ -1,0 +1,1 @@
+- Added patch for issue in xulrunner. Patch is applied upstream, but current version being re-released with patch on Fedora and Ubuntu.
