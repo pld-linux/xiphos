@@ -1,7 +1,7 @@
 Summary:	GNOME-based Bible research tool
 Name:		xiphos
 Version:	3.1.3
-Release:	0.3
+Release:	0.4
 License:	GPL
 Group:		X11/Applications
 URL:		http://www.xiphos.org/
@@ -17,6 +17,7 @@ BuildRequires:	libgsf-devel >= 1
 BuildRequires:	rpmbuild(macros) >= 1.198
 BuildRequires:	scrollkeeper >= 0.3.5
 BuildRequires:	sword-devel >= 1.6.1
+BuildRequires:	xulrunner-devel >= 1.9.3.2
 Requires(post,postun):	scrollkeeper
 Requires:	clucene-core
 Requires:	gtkhtml >= 3.0
@@ -24,6 +25,7 @@ Requires:	libbonobo >= 2.0
 Requires:	libgnomeui >= 2.2
 Requires:	libgsf >= 1
 Requires:	sword >= 1.6.1
+Requires:	xulrunner >= 1.9.3.2
 Obsoletes:	gnomesword
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
