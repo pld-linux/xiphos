@@ -1,19 +1,19 @@
 Summary:	GNOME-based Bible research tool
 Name:		xiphos
-Version:	3.1.3
-Release:	0.4
+Version:	3.1.4
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
 URL:		http://www.xiphos.org/
 Source0:	http://downloads.sourceforge.net/gnomesword/Xiphos/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	aaded6bc81b29935edd989d204928ba3
-Patch0:		%{name}-xulrunner.patch
+# Source0-md5:	4d6f7805c4c8185f5c4ac3bd95fc705a
 BuildRequires:	clucene-core-devel
 BuildRequires:	gnome-spell
 BuildRequires:	gtkhtml-devel >= 3.0
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.2
 BuildRequires:	libgsf-devel >= 1
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.198
 BuildRequires:	scrollkeeper >= 0.3.5
 BuildRequires:	sword-devel >= 1.6.1
@@ -40,16 +40,18 @@ Society through the SWORD Project.
 
 %prep
 %setup -q
-%patch0 -p0
 
 %build
-%configure
-%{__make}
+./waf configure \
+	--prefix %{_prefix} \
+	--debug-level optimized \
+	--enable-delint
+./waf build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+./waf install \
+	--destdir $RPM_BUILD_ROOT
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/%{name}
 rm -r $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/xiphos.svg
@@ -69,9 +71,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc ABOUT-NLS AUTHORS INSTALL NEWS README TODO
+%doc COPYING AUTHORS INSTALL NEWS README TODO TRANSLATION-HOWTO RELEASE-NOTES ChangeLog
 %doc %{_datadir}/gnome/help/*
 %attr(755,root,root) %{_bindir}/xiphos
+%attr(755,root,root) %{_bindir}/xiphos-nav
 %{_datadir}/xiphos
 %dir %{_datadir}/omf/xiphos
 %{_datadir}/omf/xiphos/*.omf
