@@ -1,7 +1,7 @@
 Summary:	GNOME-based Bible research tool
 Name:		xiphos
 Version:	3.1.4
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 URL:		http://www.xiphos.org/
