@@ -1,14 +1,19 @@
 Summary:	GNOME-based Bible research tool
 Name:		xiphos
-Version:	3.1.4
-Release:	2
+Version:	3.1.5svn
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
 URL:		http://www.xiphos.org/
-Source0:	http://downloads.sourceforge.net/gnomesword/Xiphos/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	4d6f7805c4c8185f5c4ac3bd95fc705a
+#Source0:	http://downloads.sourceforge.net/gnomesword/Xiphos/%{version}/%{name}-%{version}.tar.gz
+# svn co https://gnomesword.svn.sourceforge.net/svnroot/gnomesword/branches/webkit xiphos-webkit-svn
+# rm -rf xiphos-webkit-svn/.svn
+# tar cvfz xiphos-webkit-svn.tar.gz xiphos-webkit-svn
+Source0:	%{name}-webkit-svn.tar.gz
+# Source0-md5:	6cc860c9e238137245307e4ae0f512f1
 BuildRequires:	clucene-core-devel
 BuildRequires:	gnome-spell
+BuildRequires:	gtk-webkit3-devel
 BuildRequires:	gtkhtml-devel >= 3.91.0
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.2
@@ -17,7 +22,6 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.198
 BuildRequires:	scrollkeeper >= 0.3.5
 BuildRequires:	sword-devel >= 1.6.2
-BuildRequires:	xulrunner-devel >= 1.9.3.2
 Requires(post,postun):	scrollkeeper
 Requires:	clucene-core
 Requires:	gtkhtml >= 3.91.0
@@ -25,7 +29,6 @@ Requires:	libbonobo >= 2.0
 Requires:	libgnomeui >= 2.2
 Requires:	libgsf >= 1
 Requires:	sword >= 1.6.2
-Requires:	xulrunner >= 1.9.3.2
 Suggests:	festival
 Obsoletes:	gnomesword
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -40,7 +43,7 @@ Bible translations and reference works distributed by Crosswire Bible
 Society through the SWORD Project.
 
 %prep
-%setup -q
+%setup -q -n %{name}-webkit-svn
 
 %build
 ./waf configure \
@@ -56,8 +59,8 @@ rm -rf $RPM_BUILD_ROOT
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/%{name}
 rm -r $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/xiphos.svg
-rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}/*.xpm
-rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}/*.ico
+#rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}/*.xpm
+#rm -r $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}/*.ico
 
 %find_lang %{name}
 
@@ -79,6 +82,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xiphos
 %dir %{_datadir}/omf/xiphos
 %{_datadir}/omf/xiphos/*.omf
-%dir %{_pixmapsdir}/%{name}
-%{_pixmapsdir}/%{name}/*.png
+#%dir %{_pixmapsdir}/%{name}
+#%{_pixmapsdir}/%{name}/*.png
 %{_desktopdir}/%{name}.desktop
